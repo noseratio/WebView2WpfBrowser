@@ -1,0 +1,65 @@
+﻿<!--
+Copyright (C) Microsoft Corporation. All rights reserved.
+Use of this source code is governed by a BSD-style license that can be
+found in the LICENSE file.
+-->
+
+<Window x:Class="WebView2WpfBrowser.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+        xmlns:local="clr-namespace:WebView2WpfBrowser"
+        x:Name="MyWindow"
+        Title="MainWindow"
+        Height="450"
+        Width="800"
+    >
+    <Window.Resources>
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.New" Executed="NewCmdExecuted"/>
+        <CommandBinding Command="ApplicationCommands.Close" Executed="CloseCmdExecuted"/>
+        <CommandBinding Command="NavigationCommands.BrowseBack" Executed="BackCmdExecuted" CanExecute="BackCmdCanExecute"/>
+        <CommandBinding Command="NavigationCommands.BrowseForward" Executed="ForwardCmdExecuted" CanExecute="ForwardCmdCanExecute"/>
+        <CommandBinding Command="NavigationCommands.Refresh" Executed="RefreshCmdExecuted" CanExecute="RefreshCmdCanExecute"/>
+        <CommandBinding Command="NavigationCommands.BrowseStop" Executed="BrowseStopCmdExecuted" CanExecute="BrowseStopCmdCanExecute"/>
+        <CommandBinding Command="NavigationCommands.GoToPage" Executed="GoToPageCmdExecuted" CanExecute="GoToPageCmdCanExecute"/>
+        <CommandBinding Command="NavigationCommands.IncreaseZoom" Executed="IncreaseZoomCmdExecuted" CanExecute="IncreaseZoomCmdCanExecute"/>
+        <CommandBinding Command="NavigationCommands.DecreaseZoom" Executed="DecreaseZoomCmdExecuted" CanExecute="DecreaseZoomCmdCanExecute"/>
+        <CommandBinding Command="{x:Static local:MainWindow.InjectScriptCommand}" Executed="InjectScriptCmdExecuted" CanExecute="CoreWebView2RequiringCmdsCanExecute"/>
+    </Window.CommandBindings>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_New Window" Command="ApplicationCommands.New"/>
+                <MenuItem Header="_Close" Command="ApplicationCommands.Close"/>
+                <MenuItem Header="_Inject Script..." Command="{x:Static local:MainWindow.InjectScriptCommand}"/>
+            </MenuItem>
+            <MenuItem Header="_View">
+                <MenuItem Header="_Increase Zoom" Command="NavigationCommands.IncreaseZoom"/>
+                <MenuItem Header="_Decrease Zoom" Command="NavigationCommands.DecreaseZoom"/>
+            </MenuItem>
+        </Menu>
+        <DockPanel DockPanel.Dock="Top">
+            <Button DockPanel.Dock="Left" Command="NavigationCommands.BrowseBack">Back</Button>
+            <Button DockPanel.Dock="Left" Command="NavigationCommands.BrowseForward">Forward</Button>
+            <Button DockPanel.Dock="Left" Command="NavigationCommands.Refresh">Refresh</Button>
+            <Button DockPanel.Dock="Left" Command="NavigationCommands.BrowseStop">Stop</Button>
+            <Button DockPanel.Dock="Right" Command="NavigationCommands.GoToPage" CommandParameter="{Binding ElementName=url,Path=Text}">Go</Button>
+            <!-- We want the address bar to update based on the WebView's Source, but we don't want the WebView to navigate just from the user typing into the address bar.   Therefore we use the OneWay binding mode. -->
+            <TextBox x:Name="url" Text="{Binding ElementName=webView,Path=Source,Mode=OneWay}">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Return" Command="NavigationCommands.GoToPage" CommandParameter="{Binding ElementName=url,Path=Text}" />
+                </TextBox.InputBindings>
+            </TextBox>
+        </DockPanel>
+        <wv2:WebView2
+            x:Name="webView"
+            CreationProperties="{StaticResource EvergreenWebView2CreationProperties}"
+            Source="https://www.bing.com/"
+            NavigationStarting="WebView_NavigationStarting"
+            NavigationCompleted="WebView_NavigationCompleted"
+        />
+    </DockPanel>
+</Window>
