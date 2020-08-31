@@ -1,4 +1,4 @@
-## Unable to try out WebView2 WPF Browser
+## Unable to try out the WebView2 WPF Browser example
 
 Please help me to try `WebView2` with a simple .NET Core WPF app.
 
