@@ -1,8 +1,8 @@
-## Unable to try out the WebView2 WPF Browser example
+## Trying out MSEdge WebView2 WPF Browser example
 
 Please help me to try `WebView2` with a simple .NET Core WPF app.
 
-[This repro](https://github.com/noseratio/WebView2WpfBrowser) is just a clone of Microsoft's [WebView2 WPF Browser](https://github.com/MicrosoftEdge/WebView2Samples/tree/master/SampleApps/WebView2WpfBrowser), shaped as a .NET Core 3.1 app and using the [`Microsoft.Web.WebView2` 0.9.579-prerelease](https://www.nuget.org/packages/Microsoft.Web.WebView2/0.9.579-prerelease), with added error handling:
+The present repro is just a clone of Microsoft's [WebView2 WPF Browser](https://github.com/MicrosoftEdge/WebView2Samples/tree/master/SampleApps/WebView2WpfBrowser), shaped as a .NET Core 3.1 app and using the [`Microsoft.Web.WebView2` 0.9.579-prerelease](https://www.nuget.org/packages/Microsoft.Web.WebView2/0.9.579-prerelease), with added error handling:
 
 ```C#
 public partial class App : Application
@@ -67,3 +67,26 @@ Microsoft.Web.WebView2.WinForms.xml
 Microsoft.Web.WebView2.Wpf.dll
 Microsoft.Web.WebView2.Wpf.xml
 ```
+
+## Update
+
+With some [help from the WebView2 team](https://github.com/MicrosoftEdge/WebViewFeedback/issues/415#issuecomment-683524586), 
+I've managed to get this sample running with `WebView2 v0.9.579-prerelease`. 
+
+I had to install Edge Dev, `v86.0.615.3` at the time of writing this:
+
+```
+choco install microsoft-edge-insider-dev
+```
+
+Apparently, as of now only `prerelease` packages contain the required .NET assemblies.
+
+So, I now could compare the working memory sets of simple Windows desktop apps with various WebView flavours. 
+
+Loading Bing home page: 
+
+- IE11 WPF WebBrowser - `166.5MB`
+- MSEdge WPF WebView2 - `733.5MB`
+- Electron v10 - `501.1MB` 
+
+![WebView working memory sets](IE11-WebBrowser-vs-WebView2-vs-Electron.png)
