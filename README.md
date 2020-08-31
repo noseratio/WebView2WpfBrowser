@@ -2,7 +2,7 @@
 
 Please help me to try `WebView2` with a simple .NET Core WPF app.
 
-[This rero](https://github.com/noseratio/WebView2WpfBrowser) is a clone of Microsoft's [WebView2 WPF Browser](https://github.com/MicrosoftEdge/WebView2Samples/tree/master/SampleApps/WebView2WpfBrowser), as a .NET Core 3.1 WPF app and using the [`Microsoft.Web.WebView2` 0.9.579-prerelease](https://www.nuget.org/packages/Microsoft.Web.WebView2/0.9.579-prerelease), with added error handling.
+[The present repro](https://github.com/noseratio/WebView2WpfBrowser) is a clone of Microsoft's [WebView2 WPF Browser](https://github.com/MicrosoftEdge/WebView2Samples/tree/master/SampleApps/WebView2WpfBrowser), as a .NET Core 3.1 WPF app and using the [`Microsoft.Web.WebView2` 0.9.579-prerelease](https://www.nuget.org/packages/Microsoft.Web.WebView2/0.9.579-prerelease), with added error handling.
 
 To compile it (Visual Studio is **not** required):
 
