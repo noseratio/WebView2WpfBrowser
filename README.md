@@ -2,7 +2,24 @@
 
 Please help me to try `WebView2` with a simple .NET Core WPF app.
 
-[The present repro](https://github.com/noseratio/WebView2WpfBrowser) is a clone of Microsoft's [WebView2 WPF Browser](https://github.com/MicrosoftEdge/WebView2Samples/tree/master/SampleApps/WebView2WpfBrowser), as a .NET Core 3.1 WPF app and using the [`Microsoft.Web.WebView2` 0.9.579-prerelease](https://www.nuget.org/packages/Microsoft.Web.WebView2/0.9.579-prerelease), with added error handling.
+[This repro](https://github.com/noseratio/WebView2WpfBrowser) is just a clone of Microsoft's [WebView2 WPF Browser](https://github.com/MicrosoftEdge/WebView2Samples/tree/master/SampleApps/WebView2WpfBrowser), shaped as a .NET Core 3.1 app and using the [`Microsoft.Web.WebView2` 0.9.579-prerelease](https://www.nuget.org/packages/Microsoft.Web.WebView2/0.9.579-prerelease), with added error handling:
+
+```C#
+public partial class App : Application
+{
+    public App()
+    {
+        this.DispatcherUnhandledException += App_DispatcherUnhandledException;
+        InitializeComponent();
+    }
+
+    private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+    {
+        MessageBox.Show(e.Exception.Message);
+        e.Handled = false;
+    }
+}
+```
 
 To try it out (Visual Studio is **not** required):
 
