@@ -4,7 +4,7 @@ Please help me to try `WebView2` with a simple .NET Core WPF app.
 
 [The present repro](https://github.com/noseratio/WebView2WpfBrowser) is a clone of Microsoft's [WebView2 WPF Browser](https://github.com/MicrosoftEdge/WebView2Samples/tree/master/SampleApps/WebView2WpfBrowser), as a .NET Core 3.1 WPF app and using the [`Microsoft.Web.WebView2` 0.9.579-prerelease](https://www.nuget.org/packages/Microsoft.Web.WebView2/0.9.579-prerelease), with added error handling.
 
-To compile it (Visual Studio is **not** required):
+To try it out (Visual Studio is **not** required):
 
 - Download and install [Download .NET Core 3.1 SDK](https://download.visualstudio.microsoft.com/download/pr/547f9f81-599a-4b58-9322-d1d158385df6/ebe3e02fd54c29487ac32409cb20d352/dotnet-sdk-3.1.401-win-x64.exe), v3.1.401 at the time of writing this.
 
