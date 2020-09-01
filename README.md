@@ -1,23 +1,12 @@
 ## Trying out MSEdge WebView2 WPF Browser example
 
-Please help me to try `WebView2` with a simple .NET Core WPF app.
-
 The present repro is just a clone of Microsoft's [WebView2 WPF Browser](https://github.com/MicrosoftEdge/WebView2Samples/tree/master/SampleApps/WebView2WpfBrowser), shaped as a .NET Core 3.1 app and using the [`Microsoft.Web.WebView2` 0.9.579-prerelease](https://www.nuget.org/packages/Microsoft.Web.WebView2/0.9.579-prerelease), with added error handling:
 
 ```C#
-public partial class App : Application
+private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
 {
-    public App()
-    {
-        this.DispatcherUnhandledException += App_DispatcherUnhandledException;
-        InitializeComponent();
-    }
-
-    private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
-    {
-        MessageBox.Show(e.Exception.Message);
-        e.Handled = false;
-    }
+    MessageBox.Show(e.Exception.Message);
+    e.Handled = false;
 }
 ```
 
@@ -81,12 +70,4 @@ choco install microsoft-edge-insider-dev
 
 Apparently, as of now only `prerelease` packages contain the required .NET assemblies.
 
-So, I now could compare the working memory sets of simple Windows desktop apps with various WebView flavours. 
-
-Loading Bing home page: 
-
-- IE11 WPF WebBrowser - `166.5MB`
-- MSEdge WPF WebView2 - `733.5MB`
-- Electron v10 - `501.1MB` 
-
-![WebView working memory sets](IE11-WebBrowser-vs-WebView2-vs-Electron.png)
+Now I've could compare [the memory footprints of simple WebView-based desktop apps](https://github.com/noseratio/CompareWebViews) of various runtime flavours. 
