@@ -70,4 +70,4 @@ choco install microsoft-edge-insider-dev
 
 Apparently, as of now only `prerelease` packages contain the required .NET assemblies.
 
-Now I've could compare [the memory footprints of simple WebView-based desktop apps](https://github.com/noseratio/CompareWebViews) of various runtime flavours. 
+## I've now compared [the memory footprints of simple WebView-based desktop apps](https://github.com/noseratio/CompareWebViews) of various runtime flavours. 
